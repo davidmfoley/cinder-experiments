@@ -2,6 +2,7 @@
 #include "cinder/gl/gl.h"
 #include "cinder/ImageIo.h"
 #include "cinder/gl/Texture.h"
+#include "ParticleController.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -10,12 +11,11 @@ using namespace std;
 class HellCinderApp : public AppNative {
   public:
 	void setup();
-	void mouseDown( MouseEvent event );	
 	void update();
 	void draw();
     void prepareSettings(Settings *settings);
-    gl::Texture imageTexture;
-    
+    Channel32f channel;
+    ParticleController particleController;
 };
 
 void HellCinderApp::prepareSettings(Settings *settings)
@@ -26,23 +26,26 @@ void HellCinderApp::prepareSettings(Settings *settings)
 
 void HellCinderApp::setup()
 {
-    string loc = "http://lorempixel.com/800/600/technics/";
+    string loc = "http://lorempixel.com/800/600/sports/";
     Url url(loc);
-    imageTexture = gl::Texture( loadImage( loadUrl( url ) ) );
-}
-
-void HellCinderApp::mouseDown( MouseEvent event )
-{
+    //imageTexture = gl::Texture( loadImage( loadUrl( url ) ) );
+    channel = Channel32f( loadImage( loadUrl( url ) ) );
+    particleController.addParticles( 15000 );
 }
 
 void HellCinderApp::update()
 {
+    particleController.update(channel);
 }
 
 void HellCinderApp::draw()
 {
-    gl::clear();
-    gl::draw( imageTexture, getWindowBounds() );
+    
+    gl::clear( Color( 0, 0, 0 ), true );
+	
+	glDisable( GL_TEXTURE_2D );
+	glColor3f( 1, 1, 1 );
+	particleController.draw();
 }
 
 CINDER_APP_NATIVE( HellCinderApp, RendererGl )
