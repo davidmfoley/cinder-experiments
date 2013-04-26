@@ -12,16 +12,16 @@ ParticleController::ParticleController()
 
 void ParticleController::update(Channel32f channel)
 {
-	for( list<Particle>::iterator p = particles.begin(); p != particles.end(); ++p)
+	for( Particle &p : particles)
     {
-		p->update(channel);
+		p.update(channel);
 	}
 }
 
 void ParticleController::draw()
 {
-	for( list<Particle>::iterator p = particles.begin(); p != particles.end(); ++p ){
-		p->draw();
+	for( Particle &p : particles ){
+		p.draw();
 	}
 }
 

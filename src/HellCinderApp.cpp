@@ -26,9 +26,9 @@ void HellCinderApp::prepareSettings(Settings *settings)
 
 void HellCinderApp::setup()
 {
-    string loc = "http://lorempixel.com/800/600/sports/";
+    string loc = "http://lorempixel.com/800/600/abstract/";
     Url url(loc);
-    //imageTexture = gl::Texture( loadImage( loadUrl( url ) ) );
+
     channel = Channel32f( loadImage( loadUrl( url ) ) );
     particleController.addParticles( 15000 );
 }

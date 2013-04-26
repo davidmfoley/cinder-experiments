@@ -20,7 +20,7 @@ Particle::Particle( Vec2f loc_ )
 void Particle::update(Channel32f channel)
 {
 	loc += dir * vel;
-    radius = 6.0f * channel.getValue(loc);
+    radius = 3.0f * channel.getValue(loc);
 }
 
 void Particle::draw()
