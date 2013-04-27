@@ -12,10 +12,20 @@ ParticleController::ParticleController()
 
 void ParticleController::update(Channel32f channel)
 {
-	for( Particle &p : particles)
+ 	for( list<Particle>::iterator p = particles.begin(); p != particles.end();)
     {
-		p.update(channel);
+		p->update(channel);
+        if (p->alive)
+        {
+            p++;
+        }
+        else
+        {
+            p = particles.erase(p);
+            this->addParticle().update(channel);
+        }
 	}
+    
 }
 
 void ParticleController::draw()
@@ -29,10 +39,16 @@ void ParticleController::addParticles( int amt )
 {
 	for( int i=0; i<amt; i++ )
 	{
-		float x = Rand::randFloat( app::getWindowWidth() );
-		float y = Rand::randFloat( app::getWindowHeight() );
-		particles.push_back( Particle( Vec2f( x, y ) ) );
+        this->addParticle();
 	}
+}
+
+Particle ParticleController::addParticle() {
+    float x = Rand::randFloat( app::getWindowWidth() );
+    float y = Rand::randFloat( app::getWindowHeight() );
+    auto p = Particle( Vec2f( x, y ) );
+    particles.push_back( p );
+    return p;
 }
 
 void ParticleController::removeParticles( int amt )

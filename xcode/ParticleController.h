@@ -19,6 +19,7 @@ public:
     void update(cinder::Channel32f channel);
     void draw();
     void addParticles(int amt);
+    Particle addParticle();
     void removeParticles(int amt);
 
     std::list<Particle> particles;

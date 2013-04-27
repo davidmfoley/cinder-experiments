@@ -15,6 +15,7 @@ class HellCinderApp : public AppNative {
 	void draw();
     void prepareSettings(Settings *settings);
     Channel32f channel;
+    gl::Texture texture;
     ParticleController particleController;
 };
 
@@ -26,11 +27,13 @@ void HellCinderApp::prepareSettings(Settings *settings)
 
 void HellCinderApp::setup()
 {
-    string loc = "http://lorempixel.com/800/600/abstract/";
+    string loc = "http://lorempixel.com/800/600/nightlife/";
     Url url(loc);
-
-    channel = Channel32f( loadImage( loadUrl( url ) ) );
-    particleController.addParticles( 15000 );
+    auto image = loadImage( loadUrl( url ) );
+    texture = gl::Texture(image);
+    channel = Channel32f( image );
+    
+    particleController.addParticles( 25000 );
 }
 
 void HellCinderApp::update()
@@ -44,7 +47,8 @@ void HellCinderApp::draw()
     gl::clear( Color( 0, 0, 0 ), true );
 	
 	glDisable( GL_TEXTURE_2D );
-	glColor3f( 1, 1, 1 );
+	//gl::draw( texture, getWindowBounds() );
+
 	particleController.draw();
 }
 

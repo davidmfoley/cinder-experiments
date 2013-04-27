@@ -24,5 +24,8 @@ public:
 	float		vel;
 	
 	float		radius;
-
+    float red, green, blue;
+    uint age;
+    uint lifespan;
+    bool alive;
 };
