@@ -17,6 +17,7 @@ class HellCinderApp : public AppNative {
     Channel32f channel;
     gl::Texture texture;
     ParticleController particleController;
+    int particleCount, particleIncrement, maxParticles;
 };
 
 void HellCinderApp::prepareSettings(Settings *settings)
@@ -27,17 +28,25 @@ void HellCinderApp::prepareSettings(Settings *settings)
 
 void HellCinderApp::setup()
 {
-    string loc = "http://lorempixel.com/800/600/nightlife/";
-    Url url(loc);
-    auto image = loadImage( loadUrl( url ) );
+    //string loc = "http://lorempixel.com/800/600/nightlife/";
+    //Url url(loc);
+    
+    auto image = loadImage( loadAsset( "Lucy.png" ) );
     texture = gl::Texture(image);
     channel = Channel32f( image );
+    particleCount = 0;
+    particleIncrement = 100;
+    maxParticles = 15000;
     
-    particleController.addParticles( 25000 );
 }
 
 void HellCinderApp::update()
 {
+    if (particleCount < maxParticles) {
+        particleController.addParticles( particleIncrement );
+        particleCount += particleIncrement;
+    }
+    
     particleController.update(channel);
 }
 

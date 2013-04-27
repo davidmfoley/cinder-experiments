@@ -30,6 +30,7 @@ void Particle::update(Channel32f channel)
 	loc += dir * vel;
     auto lifePhase = ((float)age) / lifespan;
     blue = channel.getValue(loc);
+    green = (15.0f * green + blue) / 16.0f;
     radius = 3.0f * (1 - (abs(lifePhase - 0.5f))) * channel.getValue(loc) + 1.0f;
     
     age++;
