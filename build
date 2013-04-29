@@ -1,0 +1,1 @@
+clang -x c++ -std=c++11 -stdlib=libc++ -I../../oss/Cinder/include -I../../oss/Cinder/boost -I./src src/ParticleController.h src/Particle.h src/ParticleController.cpp src/Particle.cpp src/HellCinderApp.cpp $1 $2
