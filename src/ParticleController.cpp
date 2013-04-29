@@ -12,9 +12,9 @@ ParticleController::ParticleController()
 
 void ParticleController::update(Channel32f channel)
 {
- 	for( list<Particle>::iterator p = particles.begin(); p != particles.end();)
+  for( list<Particle>::iterator p = particles.begin(); p != particles.end();)
     {
-		p->update(channel);
+    p->update(channel);
         if (p->alive)
         {
             p++;
@@ -24,23 +24,23 @@ void ParticleController::update(Channel32f channel)
             p = particles.erase(p);
             this->addParticle().update(channel);
         }
-	}
-    
+  }
+
 }
 
 void ParticleController::draw()
 {
-	for( Particle &p : particles ){
-		p.draw();
-	}
+  for( Particle &p : particles ){
+    p.draw();
+  }
 }
 
 void ParticleController::addParticles( int amt )
 {
-	for( int i=0; i<amt; i++ )
-	{
+  for( int i=0; i<amt; i++ )
+  {
         this->addParticle();
-	}
+  }
 }
 
 Particle ParticleController::addParticle() {
@@ -53,9 +53,9 @@ Particle ParticleController::addParticle() {
 
 void ParticleController::removeParticles( int amt )
 {
-	for( int i=0; i<amt; i++ )
-	{
-		particles.pop_back();
-	}
+  for( int i=0; i<amt; i++ )
+  {
+    particles.pop_back();
+  }
 }
 

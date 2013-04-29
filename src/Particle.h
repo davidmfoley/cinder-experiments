@@ -10,6 +10,7 @@
 #define __HellCinder__Particle__
 
 #include <iostream>
+#include "cinder/app/AppNative.h"
 
 #endif /* defined(__HellCinder__Particle__) */
 class Particle {
